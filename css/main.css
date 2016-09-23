@@ -1,0 +1,45 @@
+html, body, .container, .row{
+  height: 100%;
+  width: 100%;
+}
+
+.sideBar, .mapContainer {
+  height: 100%;
+}
+
+#map {
+  height: 100%;
+}
+
+.sideBar {
+  font-size: 1.3em;
+  background-color: white;
+}
+
+#showOptions {
+  visibility: hidden;
+  position: absolute;
+  left: 100vw;
+  transform: translateX(-100%);
+  top: 0px;
+  width: 150px;
+  height: 70px;
+  z-index: 4;
+}
+
+@media only screen and (max-width: 990px) {
+  .sideBar {
+    width: 300px;
+    position:absolute;
+    top: 0;
+    left: -300px;
+    z-index: 3;
+  }
+
+  #showOptions{
+    visibility: visible;
+  }
+  .visibleSideBar {
+    transform: translateX(300px);
+  }
+}

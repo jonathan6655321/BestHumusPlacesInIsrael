@@ -3,22 +3,53 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/main.css">
     <script src="js\knockout-3.4.0.js"></script>
     <title>Best Humus Places in Israel</title>
   </head>
   <body>
     <div class="container">
-      <div class="row mainRow">
-        <div class="sideBar col-xs-4">
-
+      <div class="row">
+        <div class="col-xs-12 col-md-4 sideBar">
+          <h1>Top 5 hummus places in Israel</h1>
+          <h3>and your time to get there</h3>
+          <form>
+            Filter: <br>
+            <input type="radio" name="area" value="All" id="all"> All <br>
+            <input type="radio" name="area" value="North" id="north"> North <br>
+            <input type="radio" name="area" value="Center" id="center"> Center <br>
+            <input type="radio" name="area" value="South" id="south"> South <br>
+          </form>
+          <ul data-bind="foreach: markersArray">
+            <li data-bind="visible: isVisible, text: title, click: clicked"></li>
+          </ul>
+          <form class="usersLocationForm" id="usersLocationForm">
+            Enter the city in Israel you are staying at: <br>
+            <input type="text" id="usersLocation"> <br>
+            (don't know any? try: tel aviv) <br>
+          </form>
+          <button type="button" name="button" data-bind="visible: userEnteredLocation" id="navigate">Duration of drive to your chosen hummus place</button>
+          <br>
+          <span data-bind="visible: geocodingError">Your location wasn't found. Chill out, grab a cold one and try again later.</span>
+          <br>
+          <span data-bind="visible: distanceError">There was an error with your request. Did you choose a hummus place?</span>
+          <br>
+          <span data-bind="text: duration"></span>
         </div>
-        <div class="col-xs-8" id="map">
-
+        <div class="col-xs-12 col-md-8 mapContainer">
+          <div id="map">
+          </div>
         </div>
       </div>
     </div>
 
+    <button type="button" name="filter" id="showOptions">Options</button>
+    <script>
+        document.getElementById('showOptions').addEventListener('click', function(){
+          document.getElementsByClassName('sideBar')[0].classList.toggle('visibleSideBar');
+        })
+    </script>
     <script src="js\main.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3x5QJU5DVoM9taAmRsI9i5z_5ItNBeiw&callback=initMap" async defer></script>
   </body>
