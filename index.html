@@ -21,6 +21,7 @@
             <input type="radio" name="area" value="Center" id="center"> Center <br>
             <input type="radio" name="area" value="South" id="south"> South <br>
           </form>
+          <h3>Hummus Places on the map: </h3>
           <ul data-bind="foreach: markersArray">
             <li data-bind="visible: isVisible, text: title, click: clicked"></li>
           </ul>
