@@ -24,7 +24,7 @@ var markerData = [
 var hummusIcon = 'images/hummus-icon.png'
 
 // ajax functions:
-var setPhotoFromFourSquare = function(googleMarker) {
+var getPhotoFromFourSquare = function(googleMarker) {
   var id;
   var url;
   $.ajax(
