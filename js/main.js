@@ -27,6 +27,9 @@ var hummusIcon = 'images/hummus-icon.png'
 var setinfoWindowToPhotoFromFourSquare = function(googleMarker) {
   var id;
   var url;
+  var failed = function() {
+    infoWindow.setContent(googleMarker.title + '<br>' + 'Failed to load image from foursquare')
+  }
   $.ajax(
     {
       url: 'https://api.foursquare.com/v2/venues/search?ll=' + googleMarker.position.lat() + ',' + googleMarker.position.lng() +
@@ -47,9 +50,15 @@ var setinfoWindowToPhotoFromFourSquare = function(googleMarker) {
               console.log(url);
               infoWindow.setContent(googleMarker.title + '<br>' +
               '<img src=\'' + url + '\'>');
+            },
+            error: function(){
+              failed();
             }
           }
         )
+      },
+      error: function(){
+        failed();
       }
     })
 
