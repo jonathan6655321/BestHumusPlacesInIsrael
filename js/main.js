@@ -24,7 +24,7 @@ var markerData = [
 var hummusIcon = 'images/hummus-icon.png'
 
 // ajax functions:
-var getPhotoFromFourSquare = function(googleMarker) {
+var setinfoWindowToPhotoFromFourSquare = function(googleMarker) {
   var id;
   var url;
   $.ajax(
@@ -45,13 +45,15 @@ var getPhotoFromFourSquare = function(googleMarker) {
               var suffix = response.response.photos.items[0].suffix;
               url = prefix + '200x200' + suffix;
               console.log(url);
+              infoWindow.setContent(googleMarker.title + '<br>' +
+              '<img src=\'' + picUrl + '\'>');
             }
           }
         )
       }
     })
 
-    return url;
+
 }
 
 
@@ -92,10 +94,11 @@ var Marker = function(map, title, lat, lng) {
     setTimeout(function(){
       googleMarker.setAnimation(null);
     }, 2000)
-    var picUrl = getPhotoFromFourSquare(googleMarker);
-    var content = googleMarker.title + '<br>' +
-    '<img src=\'' + picUrl + '\'>';
-    infoWindow.setContent(content);
+    infoWindow.setContent(googleMarker.title);
+    setinfoWindowToPhotoFromFourSquare(googleMarker);
+    // var picUrl = getPhotoFromFourSquare(googleMarker);
+    // var content = googleMarker.title + '<br>' +
+    // '<img src=\'' + picUrl + '\'>';
     infoWindow.open(map, googleMarker);
   }
 
