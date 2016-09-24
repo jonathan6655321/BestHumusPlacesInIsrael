@@ -29,7 +29,7 @@ var getPhotoFromFourSquare = function(googleMarker) {
   $.ajax(
     {
       url: 'https://api.foursquare.com/v2/venues/search?ll=' + googleMarker.position.lat() + ',' + googleMarker.position.lng() +
-      '&client_id=' + 'G1QGK54FRVYWNFQLIVRFKSHRE12IXJH3MZSEUPW3XX3G0OPR' + '&client_secret='
+      '&client_id=' + 'G1QGK54FRVYWNFQLIVRFKSHRE12IXJH3MZSEUPW3XX3G0OPR' + '&client_secret=' +
       'YQRY2GECSF4ERFHMDTSETWMQ0YWHM4QUDNPSZ2RQ053SF5WL' + '&v=20160924',
       success: function(response){
         console.log(response.response.venues[0].id);
