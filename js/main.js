@@ -26,6 +26,7 @@ var hummusIcon = 'images/hummus-icon.png'
 // ajax functions:
 var getPhotoFromFourSquare = function(googleMarker) {
   var id;
+  var url;
   $.ajax(
     {
       url: 'https://api.foursquare.com/v2/venues/search?ll=' + googleMarker.position.lat() + ',' + googleMarker.position.lng() +
@@ -42,7 +43,7 @@ var getPhotoFromFourSquare = function(googleMarker) {
             success: function (response){
               var prefix = response.response.photos.items[0].prefix;
               var suffix = response.response.photos.items[0].suffix;
-              url = prefix + '100x100' + suffix;
+              url = prefix + '200x200' + suffix;
               console.log(url);
             }
           }
@@ -50,6 +51,7 @@ var getPhotoFromFourSquare = function(googleMarker) {
       }
     })
 
+    return url;
 }
 
 
@@ -90,14 +92,9 @@ var Marker = function(map, title, lat, lng) {
     setTimeout(function(){
       googleMarker.setAnimation(null);
     }, 2000)
-    console.log(googleMarker.position.lat())
-    getPhotoFromFourSquare(googleMarker);
+    var picUrl = getPhotoFromFourSquare(googleMarker);
     var content = googleMarker.title + '<br>' +
-    '<img src=\'https://maps.googleapis.com/maps/api/streetview?size=200x200&location=' +
-    googleMarker.position.lat() +
-    ',' +
-    googleMarker.position.lng() +
-    '&heading=-20&pitch=-0.76&key=AIzaSyC3x5QJU5DVoM9taAmRsI9i5z_5ItNBeiw\'>';
+    '<img src=\'' + picUrl + '\'>' 
     infoWindow.setContent(content);
     infoWindow.open(map, googleMarker);
   }
