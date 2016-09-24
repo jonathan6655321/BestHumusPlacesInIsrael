@@ -46,7 +46,7 @@ var setinfoWindowToPhotoFromFourSquare = function(googleMarker) {
               url = prefix + '200x200' + suffix;
               console.log(url);
               infoWindow.setContent(googleMarker.title + '<br>' +
-              '<img src=\'' + picUrl + '\'>');
+              '<img src=\'' + url + '\'>');
             }
           }
         )
