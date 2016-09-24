@@ -23,6 +23,32 @@ var markerData = [
 
 var hummusIcon = 'images/hummus-icon.png'
 
+// ajax functions:
+var getPhotoFromFourSquare = function(googleMarker) {
+  var id;
+  $.ajax(
+    {
+      url: 'https://api.foursquare.com/v2/venues/search?ll=' + googleMarker.position.lat() + ',' + googleMarker.position.lng() +
+      '&client_id=' + 'G1QGK54FRVYWNFQLIVRFKSHRE12IXJH3MZSEUPW3XX3G0OPR' + '&client_secret='
+      'YQRY2GECSF4ERFHMDTSETWMQ0YWHM4QUDNPSZ2RQ053SF5WL' + '&v=20160924',
+      success: function(response){
+        console.log(response.response.venues[0].id);
+        id = response.response.venues[0].id;
+        $.ajax(
+          {
+            url: 'https://api.foursquare.com/v2/venues/' +
+            id + '/photos?oauth_token=2U1OM0OO4EZWZ2DTWPRPFKTRILO5EQM00O5LVQPMUETTIOLO&v=20160924',
+            success: function (response){
+              console.log(response.response.photos.items[0].source.url);
+              console.log(response);
+            }
+          }
+        )
+      }
+    })
+
+}
+
 
 // marker object - handles googlemaps marker and knockout observables.
 var Marker = function(map, title, lat, lng) {
@@ -62,6 +88,7 @@ var Marker = function(map, title, lat, lng) {
       googleMarker.setAnimation(null);
     }, 2000)
     console.log(googleMarker.position.lat())
+    getPhotoFromFourSquare(googleMarker);
     var content = googleMarker.title + '<br>' +
     '<img src=\'https://maps.googleapis.com/maps/api/streetview?size=200x200&location=' +
     googleMarker.position.lat() +
