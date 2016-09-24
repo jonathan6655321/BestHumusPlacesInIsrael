@@ -7,6 +7,9 @@ html, body, .container, .row{
   height: 100%;
 }
 
+.mapContainer {
+  background-color: gray;
+}
 #map {
   height: 100%;
 }
