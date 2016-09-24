@@ -37,10 +37,13 @@ var getPhotoFromFourSquare = function(googleMarker) {
         $.ajax(
           {
             url: 'https://api.foursquare.com/v2/venues/' +
-            id + '/photos?oauth_token=2U1OM0OO4EZWZ2DTWPRPFKTRILO5EQM00O5LVQPMUETTIOLO&v=20160924',
+            id + '/photos?' + '&client_id=' + 'G1QGK54FRVYWNFQLIVRFKSHRE12IXJH3MZSEUPW3XX3G0OPR' + '&client_secret=' +
+            'YQRY2GECSF4ERFHMDTSETWMQ0YWHM4QUDNPSZ2RQ053SF5WL' + '&v=20160924',
             success: function (response){
-              console.log(response.response.photos.items[0].source.url);
-              console.log(response);
+              var prefix = response.response.photos.items[0].prefix;
+              var suffix = response.response.photos.items[0].suffix;
+              url = prefix + '100x100' + suffix;
+              console.log(url);
             }
           }
         )
