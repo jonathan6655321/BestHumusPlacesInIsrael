@@ -156,7 +156,22 @@ var viewModel = {
   geocodingError: ko.observable(false),
   userEnteredLocation: ko.observable(false),
   distanceError: ko.observable(false),
-  duration: ko.observable('')
+  duration: ko.observable(''),
+  updateUsersLocation: function() {
+    var usersLocation = document.getElementById('usersLocation').value;
+
+    geocoder.geocode( {'address': usersLocation} , function(results, status) {
+        if ( status == 'OK') {
+          viewModel.geocodingError(false);
+          usersLocatonMarker.setMap(map);
+          usersLocatonMarker.setPosition(results[0].geometry.location);
+          viewModel.userEnteredLocation(true);
+        } else {
+          viewModel.geocodingError(true);
+          viewModel.userEnteredLocation(false);
+        }
+    } );
+  }
 };
 
 var map;
@@ -198,29 +213,23 @@ function initMap(){
 
 ko.applyBindings(viewModel);
 
-// filter event listeners:
-// document.getElementById('all').addEventListener('click', viewModel.showAll);
-// document.getElementById('north').addEventListener('click', viewModel.showNorth);
-// document.getElementById('center').addEventListener('click', viewModel.showCenter);
-// document.getElementById('south').addEventListener('click', viewModel.showSouth);
-
 // geocode data entered by user and use it to update the users marker
-document.getElementById('usersLocationForm').addEventListener('submit', function(event){
-  event.preventDefault();
-  var usersLocation = document.getElementById('usersLocation').value;
-
-  geocoder.geocode( {'address': usersLocation} , function(results, status) {
-      if ( status == 'OK') {
-        viewModel.geocodingError(false);
-        usersLocatonMarker.setMap(map);
-        usersLocatonMarker.setPosition(results[0].geometry.location);
-        viewModel.userEnteredLocation(true);
-      } else {
-        viewModel.geocodingError(true);
-        viewModel.userEnteredLocation(false);
-      }
-  } );
-})
+// document.getElementById('usersLocationForm').addEventListener('submit', function(event){
+//   event.preventDefault();
+//   var usersLocation = document.getElementById('usersLocation').value;
+//
+//   geocoder.geocode( {'address': usersLocation} , function(results, status) {
+//       if ( status == 'OK') {
+//         viewModel.geocodingError(false);
+//         usersLocatonMarker.setMap(map);
+//         usersLocatonMarker.setPosition(results[0].geometry.location);
+//         viewModel.userEnteredLocation(true);
+//       } else {
+//         viewModel.geocodingError(true);
+//         viewModel.userEnteredLocation(false);
+//       }
+//   } );
+// })
 
 // calculates and shows the time to arrive from your city to a chosen hummus place by car
 document.getElementById('navigate').addEventListener('click', function(){
