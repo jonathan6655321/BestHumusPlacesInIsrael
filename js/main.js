@@ -173,6 +173,7 @@ var viewModel = {
     } );
   },
   calculateDuration: function() {
+    console.log('function triggered')
     var updateDistanceError = function(bool = true, duration = '') {
       viewModel.distanceError(bool);
       viewModel.duration(duration);
