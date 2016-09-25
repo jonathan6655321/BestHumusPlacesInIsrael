@@ -199,7 +199,7 @@ function initMap(){
 ko.applyBindings(viewModel);
 
 // filter event listeners:
-document.getElementById('all').addEventListener('click', viewModel.showAll);
+// document.getElementById('all').addEventListener('click', viewModel.showAll);
 document.getElementById('north').addEventListener('click', viewModel.showNorth);
 document.getElementById('center').addEventListener('click', viewModel.showCenter);
 document.getElementById('south').addEventListener('click', viewModel.showSouth);
