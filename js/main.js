@@ -156,7 +156,7 @@ var viewModel = {
   geocodingError: ko.observable(false),
   userEnteredLocation: ko.observable(false),
   distanceError: ko.observable(false),
-  duration: ko.observable(''),
+  duration: ko.observable(null),
   updateUsersLocation: function() {
     var usersLocation = document.getElementById('usersLocation').value;
 
