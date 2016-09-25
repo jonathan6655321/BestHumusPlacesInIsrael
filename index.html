@@ -26,9 +26,10 @@
           <ul data-bind="foreach: markersArray">
             <li data-bind="visible: isVisible, text: title, click: clicked"></li>
           </ul>
-          <form class="usersLocationForm" id="usersLocationForm">
+          <form class="usersLocationForm" id="usersLocationForm" data-bind="submit: updateUsersLocation">
             Enter the city in Israel you are staying at: <br>
-            <input type="text" id="usersLocation" data-bind="submit: updateUsersLocation"> <br>
+            <input type="text" id="usersLocation">
+            <button type="submit">Submit</button> <br>
             (don't know any? try: tel aviv) <br>
           </form>
           <button type="button" name="button" data-bind="visible: userEnteredLocation" id="navigate">Duration of drive to your chosen hummus place</button>
