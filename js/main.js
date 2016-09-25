@@ -171,6 +171,36 @@ var viewModel = {
           viewModel.userEnteredLocation(false);
         }
     } );
+  },
+  calculateDuration: function() {
+    var updateDistanceError = function(bool = true, duration = '') {
+      viewModel.distanceError(bool);
+      viewModel.duration(duration);
+    }
+
+    if (infoWindow.anchor == null) {
+      updateDistanceError();
+    };
+    service.getDistanceMatrix(
+      {
+        origins: [usersLocatonMarker.position],
+        destinations: [infoWindow.anchor.position],
+        travelMode: 'DRIVING'
+      }, function(response, status){
+        if ( status == 'OK') {
+          try {
+            response.rows[0].elements[0].duration.text;
+          } catch(err) {
+            updateDistanceError();
+          }
+          updateDistanceError(false, response.rows[0].elements[0].duration.text);
+
+          // console.log(response.rows[0].elements[0].duration.text)
+        } else {
+          // console.log('error');
+          updateDistanceError();
+        }
+      });
   }
 };
 
@@ -232,33 +262,33 @@ ko.applyBindings(viewModel);
 // })
 
 // calculates and shows the time to arrive from your city to a chosen hummus place by car
-document.getElementById('navigate').addEventListener('click', function(){
-  var updateDistanceError = function(bool = true, duration = '') {
-    viewModel.distanceError(bool);
-    viewModel.duration(duration);
-  }
-
-  if (infoWindow.anchor == null) {
-    updateDistanceError();
-  };
-  service.getDistanceMatrix(
-    {
-      origins: [usersLocatonMarker.position],
-      destinations: [infoWindow.anchor.position],
-      travelMode: 'DRIVING'
-    }, function(response, status){
-      if ( status == 'OK') {
-        try {
-          response.rows[0].elements[0].duration.text;
-        } catch(err) {
-          updateDistanceError();
-        }
-        updateDistanceError(false, response.rows[0].elements[0].duration.text);
-
-        // console.log(response.rows[0].elements[0].duration.text)
-      } else {
-        // console.log('error');
-        updateDistanceError();
-      }
-    });
-})
+// document.getElementById('navigate').addEventListener('click', function(){
+//   var updateDistanceError = function(bool = true, duration = '') {
+//     viewModel.distanceError(bool);
+//     viewModel.duration(duration);
+//   }
+//
+//   if (infoWindow.anchor == null) {
+//     updateDistanceError();
+//   };
+//   service.getDistanceMatrix(
+//     {
+//       origins: [usersLocatonMarker.position],
+//       destinations: [infoWindow.anchor.position],
+//       travelMode: 'DRIVING'
+//     }, function(response, status){
+//       if ( status == 'OK') {
+//         try {
+//           response.rows[0].elements[0].duration.text;
+//         } catch(err) {
+//           updateDistanceError();
+//         }
+//         updateDistanceError(false, response.rows[0].elements[0].duration.text);
+//
+//         // console.log(response.rows[0].elements[0].duration.text)
+//       } else {
+//         // console.log('error');
+//         updateDistanceError();
+//       }
+//     });
+// })

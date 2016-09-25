@@ -32,7 +32,7 @@
             <button type="submit">Submit</button> <br>
             (don't know any? try: tel aviv) <br>
           </form>
-          <button type="button" name="button" data-bind="visible: userEnteredLocation" id="navigate">Duration of drive to your chosen hummus place</button>
+          <button type="button" name="button" data-bind="visible: userEnteredLocation" id="navigate" data-bind="click: calculateDuration">Duration of drive to your chosen hummus place</button>
           <br>
           <span data-bind="visible: geocodingError">Your location wasn't found. Chill out, grab a cold one and try again later.</span>
           <br>
