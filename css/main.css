@@ -18,6 +18,7 @@ html, body, .container, .row{
 .sideBar {
   font-size: 1.3em;
   background-color: beige;
+  overflow: scroll;
 }
 
 #showOptions {
