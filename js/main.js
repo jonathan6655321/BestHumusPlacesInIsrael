@@ -125,6 +125,7 @@ var viewModel = {
     viewModel.markersArray().forEach(function(marker){
       marker.isVisible(true);
     });
+    return true;
   },
   showNorth: function(){
     viewModel.markersArray().forEach(function(marker){
