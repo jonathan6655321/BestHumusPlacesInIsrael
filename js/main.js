@@ -124,8 +124,9 @@ var viewModel = {
   showAll: function(){
     viewModel.markersArray().forEach(function(marker){
       marker.isVisible(true);
-    })
+    });
     document.getElementById("all").checked = true;
+    console.log('hmmmmm')
   },
   showNorth: function(){
     viewModel.markersArray().forEach(function(marker){
