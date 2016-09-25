@@ -35,11 +35,11 @@
           </form>
           <button type="button" name="button" data-bind="visible: userEnteredLocation, click: calculateDuration" id="navigate">Duration of drive to your chosen hummus place</button>
           <br>
+          <h2 data-bind="visible: duration().length > 0 ">It will take you <span data-bind="text: duration"></span> to get there.</h2>
+          <br>
           <span data-bind="visible: geocodingError">Your location wasn't found. Chill out, grab a cold one and try again later.</span>
           <br>
           <span data-bind="visible: distanceError">There was an error with your request. Did you choose a hummus place?</span>
-          <br>
-          <h2 data-bind="visible: duration().length > 0 ">It will take you <span data-bind="text: duration"></span> to get there.</h2>
         </div>
         <div class="col-xs-12 col-md-8 mapContainer">
           <div id="map">
