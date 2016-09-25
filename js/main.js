@@ -125,7 +125,6 @@ var viewModel = {
     viewModel.markersArray().forEach(function(marker){
       marker.isVisible(true);
     });
-    return true;
   },
   showNorth: function(){
     viewModel.markersArray().forEach(function(marker){
@@ -201,9 +200,9 @@ ko.applyBindings(viewModel);
 
 // filter event listeners:
 // document.getElementById('all').addEventListener('click', viewModel.showAll);
-document.getElementById('north').addEventListener('click', viewModel.showNorth);
-document.getElementById('center').addEventListener('click', viewModel.showCenter);
-document.getElementById('south').addEventListener('click', viewModel.showSouth);
+// document.getElementById('north').addEventListener('click', viewModel.showNorth);
+// document.getElementById('center').addEventListener('click', viewModel.showCenter);
+// document.getElementById('south').addEventListener('click', viewModel.showSouth);
 
 // geocode data entered by user and use it to update the users marker
 document.getElementById('usersLocationForm').addEventListener('submit', function(event){
